@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageDevGroup. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <!-- Extend customer-sso's section with the Okta-specific OIDC settings. -->
+        <section id="magedevgroup_customer_sso">
+            <group id="okta" translate="label comment" type="text" sortOrder="20"
+                   showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Okta</label>
+                <comment>Shown only when Okta is the selected identity provider.</comment>
+                <depends>
+                    <field id="magedevgroup_customer_sso/general/enabled">1</field>
+                    <field id="magedevgroup_customer_sso/general/active_provider">okta</field>
+                </depends>
+                <field id="domain" translate="label comment" type="text" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Org Domain</label>
+                    <comment><![CDATA[Your Okta org domain, e.g. <code>dev-123.okta.com</code>
+                        or a custom domain. Scheme optional; <code>https</code> is assumed.]]></comment>
+                </field>
+                <field id="auth_server" translate="label comment" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom Authorization Server</label>
+                    <comment><![CDATA[Optional Okta authorization server id (e.g. <code>default</code>).
+                        Leave empty to use the org authorization server.]]></comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
