@@ -1,4 +1,4 @@
-# MageDevGroup_CustomerSsoOkta
+# DmLab_CustomerSsoOkta
 
 > Okta login for the Magento 2 storefront.
 
@@ -9,8 +9,8 @@ Thin Okta provider plugin for the `customer-sso` storefront SSO capability. It s
 ## Installation
 
 ```bash
-composer require magedevgroup/module-customer-sso-okta
-bin/magento module:enable MageDevGroup_SsoCore MageDevGroup_CustomerSso MageDevGroup_CustomerSsoOkta
+composer require dmlab/module-customer-sso-okta
+bin/magento module:enable DmLab_SsoCore DmLab_CustomerSso DmLab_CustomerSsoOkta
 bin/magento setup:upgrade
 ```
 
@@ -30,10 +30,10 @@ In the Okta Admin Console → **Applications → Create App Integration**:
 
 ## Configuration
 
-Admin → Stores → Configuration → **MageDevGroup → Customer SSO** (store-scoped —
+Admin → Stores → Configuration → **DMLab → Customer SSO** (store-scoped —
 tune per store view).
 
-**General** (`magedevgroup_customer_sso/general/*`):
+**General** (`dmlab_customer_sso/general/*`):
 
 | Field | Value |
 |---|---|
@@ -42,7 +42,7 @@ tune per store view).
 | Client ID | from the Okta app |
 | Client Secret | from the Okta app |
 
-**Okta** (`magedevgroup_customer_sso/okta/*`, shown when Okta is selected):
+**Okta** (`dmlab_customer_sso/okta/*`, shown when Okta is selected):
 
 | Field | Value |
 |---|---|
@@ -65,8 +65,8 @@ is the second consumer. The preset is duplicated here rather than extracted into
 
 - The shared surface is small (~40 lines: discovery-URL builder, domain normalization,
   default scopes, groups claim, button metadata).
-- The two presets are not literal copies — `admin-sso-okta` reads the `magedevgroup_admin_sso`
-  config section (admin scope), this plugin reads `magedevgroup_customer_sso` (store scope), and
+- The two presets are not literal copies — `admin-sso-okta` reads the `dmlab_admin_sso`
+  config section (admin scope), this plugin reads `dmlab_customer_sso` (store scope), and
   each ships its own logo asset. A shared preset would have to parameterize config path + asset id.
 - Keeps the suite's `<capability>-<idp>` scheme: adding an IdP is one new plugin, the core is
   never touched. No extra shared repo to version and release.
@@ -78,7 +78,7 @@ Extraction stays open if the copies grow or drift (rule of three) — not yet ea
 - Magento **2.4.x**
 - PHP **8.3 – 8.5**
 
-## Part of the MageDevGroup identity suite
+## Part of the DMLab identity suite
 
 | Repo | Role |
 |------|------|
@@ -89,4 +89,4 @@ Extraction stays open if the copies grow or drift (rule of three) — not yet ea
 
 ## License
 
-[OSL-3.0](LICENSE) © MageDevGroup. Commercial licensing and support: <https://magedevgroup.com>.
+[OSL-3.0](LICENSE) © DMLab. Commercial licensing and support: <https://dmlab.work>.

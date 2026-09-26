@@ -1,14 +1,14 @@
 <?php
 /**
- * Copyright © MageDevGroup. All rights reserved.
+ * Copyright © DMLab. All rights reserved.
  */
 declare(strict_types=1);
 
-namespace MageDevGroup\CustomerSsoOkta\Test\Unit\Model;
+namespace DmLab\CustomerSsoOkta\Test\Unit\Model;
 
-use MageDevGroup\CustomerSsoOkta\Model\Config;
-use MageDevGroup\CustomerSsoOkta\Model\OktaPreset;
-use MageDevGroup\SsoCore\Api\ProviderPresetInterface;
+use DmLab\CustomerSsoOkta\Model\Config;
+use DmLab\CustomerSsoOkta\Model\OktaPreset;
+use DmLab\SsoCore\Api\ProviderPresetInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
 use PHPUnit\Framework\TestCase;
@@ -71,7 +71,7 @@ class OktaPresetTest extends TestCase
     {
         self::assertSame('Sign in with Okta', $this->preset->getButtonLabel());
         self::assertSame(
-            'https://magento.loc/static/MageDevGroup_CustomerSsoOkta::images/okta.svg',
+            'https://magento.loc/static/DmLab_CustomerSsoOkta::images/okta.svg',
             $this->preset->getButtonIconUrl()
         );
     }

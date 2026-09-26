@@ -1,12 +1,12 @@
 <?php
 /**
- * Copyright © MageDevGroup. All rights reserved.
+ * Copyright © DMLab. All rights reserved.
  */
 declare(strict_types=1);
 
-namespace MageDevGroup\CustomerSsoOkta\Model;
+namespace DmLab\CustomerSsoOkta\Model;
 
-use MageDevGroup\SsoCore\Api\ProviderPresetInterface;
+use DmLab\SsoCore\Api\ProviderPresetInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
 
 /**
@@ -38,7 +38,7 @@ class OktaPreset implements ProviderPresetInterface
     private const BUTTON_LABEL = 'Sign in with Okta';
 
     /** Module-relative asset id of the login-button logo. */
-    private const ICON_ASSET = 'MageDevGroup_CustomerSsoOkta::images/okta.svg';
+    private const ICON_ASSET = 'DmLab_CustomerSsoOkta::images/okta.svg';
 
     /**
      * @param Config $config

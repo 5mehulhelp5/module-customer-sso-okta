@@ -1,10 +1,10 @@
 <?php
 /**
- * Copyright © MageDevGroup. All rights reserved.
+ * Copyright © DMLab. All rights reserved.
  */
 declare(strict_types=1);
 
-namespace MageDevGroup\CustomerSsoOkta\Model;
+namespace DmLab\CustomerSsoOkta\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
@@ -22,10 +22,10 @@ use Magento\Store\Model\ScopeInterface;
 class Config
 {
     /** Okta org domain (e.g. `dev-123.okta.com`). */
-    public const XML_PATH_DOMAIN = 'magedevgroup_customer_sso/okta/domain';
+    public const XML_PATH_DOMAIN = 'dmlab_customer_sso/okta/domain';
 
     /** Optional custom authorization server id (e.g. `default`). */
-    public const XML_PATH_AUTH_SERVER = 'magedevgroup_customer_sso/okta/auth_server';
+    public const XML_PATH_AUTH_SERVER = 'dmlab_customer_sso/okta/auth_server';
 
     /**
      * @param ScopeConfigInterface $scopeConfig
