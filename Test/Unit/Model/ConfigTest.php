@@ -1,12 +1,12 @@
 <?php
 /**
- * Copyright © MageDevGroup. All rights reserved.
+ * Copyright © DMLab. All rights reserved.
  */
 declare(strict_types=1);
 
-namespace MageDevGroup\CustomerSsoOkta\Test\Unit\Model;
+namespace DmLab\CustomerSsoOkta\Test\Unit\Model;
 
-use MageDevGroup\CustomerSsoOkta\Model\Config;
+use DmLab\CustomerSsoOkta\Model\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use PHPUnit\Framework\TestCase;
@@ -58,7 +58,7 @@ class ConfigTest extends TestCase
 
     public function testConfigPathsAreStoreScopedUnderCustomerSso(): void
     {
-        self::assertSame('magedevgroup_customer_sso/okta/domain', Config::XML_PATH_DOMAIN);
-        self::assertSame('magedevgroup_customer_sso/okta/auth_server', Config::XML_PATH_AUTH_SERVER);
+        self::assertSame('dmlab_customer_sso/okta/domain', Config::XML_PATH_DOMAIN);
+        self::assertSame('dmlab_customer_sso/okta/auth_server', Config::XML_PATH_AUTH_SERVER);
     }
 }

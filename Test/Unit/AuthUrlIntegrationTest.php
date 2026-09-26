@@ -1,22 +1,22 @@
 <?php
 /**
- * Copyright © MageDevGroup. All rights reserved.
+ * Copyright © DMLab. All rights reserved.
  */
 declare(strict_types=1);
 
-namespace MageDevGroup\CustomerSsoOkta\Test\Unit;
+namespace DmLab\CustomerSsoOkta\Test\Unit;
 
-use MageDevGroup\CustomerSso\Model\ActiveProviderResolver;
-use MageDevGroup\CustomerSso\Model\Config as CustomerSsoConfig;
-use MageDevGroup\CustomerSso\Model\Config\Source\ActiveProvider;
-use MageDevGroup\CustomerSso\Model\Oidc\AuthorizationStarter;
-use MageDevGroup\CustomerSso\Model\PresetRegistry;
-use MageDevGroup\CustomerSsoOkta\Model\Config as OktaConfig;
-use MageDevGroup\CustomerSsoOkta\Model\OktaPreset;
-use MageDevGroup\SsoCore\Api\AuthorizationStateStorageInterface;
-use MageDevGroup\SsoCore\Model\Oidc\AuthorizationRequestFactory;
-use MageDevGroup\SsoCore\Model\Oidc\DiscoveryClient;
-use MageDevGroup\SsoCore\Model\Oidc\ProviderMetadata;
+use DmLab\CustomerSso\Model\ActiveProviderResolver;
+use DmLab\CustomerSso\Model\Config as CustomerSsoConfig;
+use DmLab\CustomerSso\Model\Config\Source\ActiveProvider;
+use DmLab\CustomerSso\Model\Oidc\AuthorizationStarter;
+use DmLab\CustomerSso\Model\PresetRegistry;
+use DmLab\CustomerSsoOkta\Model\Config as OktaConfig;
+use DmLab\CustomerSsoOkta\Model\OktaPreset;
+use DmLab\SsoCore\Api\AuthorizationStateStorageInterface;
+use DmLab\SsoCore\Model\Oidc\AuthorizationRequestFactory;
+use DmLab\SsoCore\Model\Oidc\DiscoveryClient;
+use DmLab\SsoCore\Model\Oidc\ProviderMetadata;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Math\Random;
 use Magento\Framework\UrlInterface;

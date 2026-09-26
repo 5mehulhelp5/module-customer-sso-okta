@@ -1,12 +1,12 @@
 <?php
 /**
- * Copyright © MageDevGroup. All rights reserved.
+ * Copyright © DMLab. All rights reserved.
  */
 declare(strict_types=1);
 
-namespace MageDevGroup\CustomerSsoOkta\Test\Unit;
+namespace DmLab\CustomerSsoOkta\Test\Unit;
 
-use MageDevGroup\CustomerSsoOkta\Model\Config;
+use DmLab\CustomerSsoOkta\Model\Config;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -32,7 +32,7 @@ class SystemConfigTest extends TestCase
     public function testOktaGroupLivesUnderCustomerSsoSection(): void
     {
         $groups = $this->xpath->query(
-            "/config/system/section[@id='magedevgroup_customer_sso']/group[@id='okta']"
+            "/config/system/section[@id='dmlab_customer_sso']/group[@id='okta']"
         );
 
         self::assertNotNull($groups);
@@ -56,7 +56,7 @@ class SystemConfigTest extends TestCase
     public function testOktaFieldsAreStoreScoped(): void
     {
         $fields = $this->xpath->query(
-            "/config/system/section[@id='magedevgroup_customer_sso']"
+            "/config/system/section[@id='dmlab_customer_sso']"
             . "/group[@id='okta']/field"
         );
 
@@ -75,7 +75,7 @@ class SystemConfigTest extends TestCase
     public function testOktaGroupDependsAreFullyQualified(): void
     {
         $ids = $this->xpath->query(
-            "/config/system/section[@id='magedevgroup_customer_sso']"
+            "/config/system/section[@id='dmlab_customer_sso']"
             . "/group[@id='okta']/depends/field/@id"
         );
 
@@ -84,15 +84,15 @@ class SystemConfigTest extends TestCase
             $paths[] = $attr->value;
         }
 
-        self::assertContains('magedevgroup_customer_sso/general/enabled', $paths);
-        self::assertContains('magedevgroup_customer_sso/general/active_provider', $paths);
+        self::assertContains('dmlab_customer_sso/general/enabled', $paths);
+        self::assertContains('dmlab_customer_sso/general/active_provider', $paths);
         foreach ($paths as $path) {
             self::assertSame(3, count(explode('/', $path)), "Depend '$path' is not fully qualified.");
         }
     }
 
     /**
-     * The preset's button icon asset id is `MageDevGroup_CustomerSsoOkta::images/okta.svg`;
+     * The preset's button icon asset id is `DmLab_CustomerSsoOkta::images/okta.svg`;
      * the storefront resolves it from the frontend area, so the file must ship there.
      */
     public function testButtonLogoAssetShipsInFrontendArea(): void
@@ -110,7 +110,7 @@ class SystemConfigTest extends TestCase
     private function assertFieldMapsToPath(string $fieldId, string $expectedPath): void
     {
         $fields = $this->xpath->query(
-            "/config/system/section[@id='magedevgroup_customer_sso']"
+            "/config/system/section[@id='dmlab_customer_sso']"
             . "/group[@id='okta']/field[@id='" . $fieldId . "']"
         );
 
