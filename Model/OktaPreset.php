@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright © DMLab. All rights reserved.
+ * Licensed under the Open Software License version 3.0 (OSL-3.0). See LICENSE.
  */
 declare(strict_types=1);
 
@@ -42,10 +43,12 @@ class OktaPreset implements ProviderPresetInterface
 
     /**
      * @param Config $config
+     * @param OrgDomain $orgDomain
      * @param AssetRepository $assetRepository
      */
     public function __construct(
         private readonly Config $config,
+        private readonly OrgDomain $orgDomain,
         private readonly AssetRepository $assetRepository
     ) {
     }
@@ -72,27 +75,26 @@ class OktaPreset implements ProviderPresetInterface
      * With no custom authorization server this is the org server
      * (`https://{domain}/.well-known/openid-configuration`); with one it is
      * `https://{domain}/oauth2/{authServer}/.well-known/openid-configuration`.
-     * The domain may be given with or without a scheme; `https` is assumed.
+     * The domain may be given with or without a scheme; only `https` is accepted.
      *
      * The org domain and auth server fall back to the storefront config when the
      * passed array omits them, so the core can call this with only its generic
      * fields and still get an Okta-configured URL.
      *
      * @param array<string,mixed> $config
-     * @throws \InvalidArgumentException when the org domain is missing.
+     * @throws \InvalidArgumentException when the org domain is missing or not an https origin.
      */
     public function buildDiscoveryUrl(array $config): string
     {
-        $domain = $this->normalizeDomain(
+        $domain = $this->orgDomain->normalize(
             $this->resolve($config, self::CONFIG_DOMAIN, $this->config->getDomain())
         );
         if ($domain === '') {
             throw new \InvalidArgumentException('The Okta org domain is not configured.');
         }
 
-        $authServer = trim(
-            $this->resolve($config, self::CONFIG_AUTH_SERVER, $this->config->getAuthServer()),
-            " \t/"
+        $authServer = $this->normalizeAuthServer(
+            $this->resolve($config, self::CONFIG_AUTH_SERVER, $this->config->getAuthServer())
         );
         $prefix = $authServer === '' ? $domain : $domain . '/oauth2/' . rawurlencode($authServer);
 
@@ -101,10 +103,17 @@ class OktaPreset implements ProviderPresetInterface
 
     /**
      * @inheritDoc
+     *
+     * Adds `groups` only for the org authorization server: custom servers do not define that scope.
      */
     public function getDefaultScopes(): array
     {
-        return ['openid', 'profile', 'email', 'groups'];
+        $scopes = ['openid', 'profile', 'email'];
+        if ($this->normalizeAuthServer((string)$this->config->getAuthServer()) === '') {
+            $scopes[] = 'groups';
+        }
+
+        return $scopes;
     }
 
     /**
@@ -116,7 +125,9 @@ class OktaPreset implements ProviderPresetInterface
     }
 
     /**
-     * @inheritDoc
+     * Return the untranslated source phrase; customer-sso translates it at render.
+     *
+     * @return string
      */
     public function getButtonLabel(): string
     {
@@ -135,6 +146,16 @@ class OktaPreset implements ProviderPresetInterface
     }
 
     /**
+     * Normalize an authorization server id; `''` means the org server.
+     *
+     * @param string $authServer
+     */
+    private function normalizeAuthServer(string $authServer): string
+    {
+        return trim($authServer, " \t/");
+    }
+
+    /**
      * Resolve a config value: an explicit key in the passed array wins (even if
      * blank, so a caller can intentionally clear it), otherwise fall back to the
      * stored storefront config value.
@@ -150,26 +171,5 @@ class OktaPreset implements ProviderPresetInterface
         }
 
         return (string)($fallback ?? '');
-    }
-
-    /**
-     * Normalize the configured org domain to a scheme-qualified origin with no
-     * trailing slash. A bare host gets `https://`; an empty value stays empty so
-     * the caller can reject it.
-     *
-     * @param string $domain
-     */
-    private function normalizeDomain(string $domain): string
-    {
-        $domain = trim($domain);
-        if ($domain === '') {
-            return '';
-        }
-
-        if (!preg_match('#^https?://#i', $domain)) {
-            $domain = 'https://' . $domain;
-        }
-
-        return rtrim($domain, '/');
     }
 }

@@ -1,12 +1,14 @@
 <?php
 /**
  * Copyright © DMLab. All rights reserved.
+ * Licensed under the Open Software License version 3.0 (OSL-3.0). See LICENSE.
  */
 declare(strict_types=1);
 
 namespace DmLab\CustomerSsoOkta\Test\Unit;
 
 use DmLab\CustomerSsoOkta\Model\Config;
+use DmLab\CustomerSsoOkta\Model\Config\Backend\OrgDomain;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -47,6 +49,20 @@ class SystemConfigTest extends TestCase
     public function testAuthServerFieldMapsToConfigPath(): void
     {
         $this->assertFieldMapsToPath('auth_server', Config::XML_PATH_AUTH_SERVER);
+    }
+
+    public function testDomainFieldUsesOrgDomainBackendModel(): void
+    {
+        $models = $this->xpath->query(
+            "/config/system/section[@id='dmlab_customer_sso']"
+            . "/group[@id='okta']/field[@id='domain']/backend_model"
+        );
+
+        self::assertSame(1, $models->length);
+        self::assertSame(
+            OrgDomain::class,
+            ltrim(trim($models->item(0)->textContent), '\\')
+        );
     }
 
     /**

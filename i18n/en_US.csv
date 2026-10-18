@@ -1,0 +1,8 @@
+"Sign in with Okta","Sign in with Okta"
+"Okta","Okta"
+"Shown only when Okta is the selected identity provider.","Shown only when Okta is the selected identity provider."
+"Org Domain","Org Domain"
+"Your Okta org domain, e.g. <code>dev-123.okta.com</code> or a custom domain. <code>https</code> only; scheme optional.","Your Okta org domain, e.g. <code>dev-123.okta.com</code> or a custom domain. <code>https</code> only; scheme optional."
+"Custom Authorization Server","Custom Authorization Server"
+"Optional Okta authorization server id (e.g. <code>default</code>). Leave empty to use the org authorization server. A custom server needs a <code>groups</code> claim on its Claims tab.","Optional Okta authorization server id (e.g. <code>default</code>). Leave empty to use the org authorization server. A custom server needs a <code>groups</code> claim on its Claims tab."
+"The Okta org domain must be a bare host name or an https:// URL with no path.","The Okta org domain must be a bare host name or an https:// URL with no path."

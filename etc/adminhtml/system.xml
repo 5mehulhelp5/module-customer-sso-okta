@@ -2,6 +2,7 @@
 <!--
 /**
  * Copyright © DMLab. All rights reserved.
+ * Licensed under the Open Software License version 3.0 (OSL-3.0). See LICENSE.
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -20,14 +21,13 @@
                 <field id="domain" translate="label comment" type="text" sortOrder="10"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Org Domain</label>
-                    <comment><![CDATA[Your Okta org domain, e.g. <code>dev-123.okta.com</code>
-                        or a custom domain. Scheme optional; <code>https</code> is assumed.]]></comment>
+                    <comment><![CDATA[Your Okta org domain, e.g. <code>dev-123.okta.com</code> or a custom domain. <code>https</code> only; scheme optional.]]></comment>
+                    <backend_model>DmLab\CustomerSsoOkta\Model\Config\Backend\OrgDomain</backend_model>
                 </field>
                 <field id="auth_server" translate="label comment" type="text" sortOrder="20"
                        showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Custom Authorization Server</label>
-                    <comment><![CDATA[Optional Okta authorization server id (e.g. <code>default</code>).
-                        Leave empty to use the org authorization server.]]></comment>
+                    <comment><![CDATA[Optional Okta authorization server id (e.g. <code>default</code>). Leave empty to use the org authorization server. A custom server needs a <code>groups</code> claim on its Claims tab.]]></comment>
                 </field>
             </group>
         </section>

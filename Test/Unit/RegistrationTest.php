@@ -1,6 +1,7 @@
 <?php
 /**
  * Copyright © DMLab. All rights reserved.
+ * Licensed under the Open Software License version 3.0 (OSL-3.0). See LICENSE.
  */
 declare(strict_types=1);
 
@@ -28,7 +29,7 @@ class RegistrationTest extends TestCase
         self::assertFileExists($path . '/etc/module.xml');
     }
 
-    public function testModuleSequencesAfterCustomerSso(): void
+    public function testModuleSequencesAfterItsDependencies(): void
     {
         $paths = (new ComponentRegistrar())->getPaths(ComponentRegistrar::MODULE);
         $moduleXml = ($paths['DmLab_CustomerSsoOkta'] ?? '') . '/etc/module.xml';
@@ -43,6 +44,8 @@ class RegistrationTest extends TestCase
             }
         }
 
+        self::assertContains('DmLab_SsoCore', $sequenced);
         self::assertContains('DmLab_CustomerSso', $sequenced);
+        self::assertContains('Magento_Config', $sequenced);
     }
 }
