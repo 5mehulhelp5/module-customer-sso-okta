@@ -3,7 +3,7 @@
     "description": "Okta provider plugin for Magento 2 storefront SSO — supplies the Okta OIDC preset (discovery, groups claim, branding) for the provider-agnostic customer-sso capability. Installs customer-sso (and sso-core) automatically.",
     "type": "magento2-module",
     "license": "OSL-3.0",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "authors": [
         {
             "name": "DMLab",
